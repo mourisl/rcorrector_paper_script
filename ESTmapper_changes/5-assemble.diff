@@ -1,0 +1,6 @@
+53,54c53,54
+<     my $minc        = 0;
+<     my $mini        = 85;  # but will be over-written by command args
+---
+>     my $minc        = 50;
+>     my $mini        = 95;

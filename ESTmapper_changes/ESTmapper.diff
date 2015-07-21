@@ -1,0 +1,18 @@
+45,46c45,46
+< require "4-polish-1.pl";
+< require "5-assemble-1.pl";
+---
+> require "4-polish.pl";
+> require "5-assemble.pl";
+239,240c239,240
+<     polish         ("-polish", "$dir", "-mincoverage", "50", "-minidentity", "90", @ARGV);
+<     assembleOutput ("-assembleoutput", "$dir", "-mincoverage", "50", "-minidentity", "90", @ARGV);
+---
+>     polish         ("-polish", "$dir", "-mincoverage", "50", "-minidentity", "95", @ARGV);
+>     assembleOutput ("-assembleoutput", "$dir", "-mincoverage", "50", "-minidentity", "95", @ARGV);
+247,248c247,248
+<     polish         ("-polish", "$dir", "-minlen", "50", "-mincoverage", "0", "-minidentity", "90", "-relink", "1000", "-abort", @ARGV);
+<     assembleOutput ("-assembleoutput", "$dir", "-minlen", "50", "-mincoverage", "0", "-minidentity", "90", @ARGV);
+---
+>     polish         ("-polish", "$dir", "-mincoverage", "50", "-minidentity", "95", "-relink", "1000", "-abort", @ARGV);
+>     assembleOutput ("-assembleoutput", "$dir", "-mincoverage", "50", "-minidentity", "95", @ARGV);

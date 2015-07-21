@@ -1,0 +1,12 @@
+28,29c28,29
+<     my $mini         = "95"; # will be rewritten by command args
+<     my $minc         = "50"; # will be rewritten by command args
+---
+>     my $mini         = "95";
+>     my $minc         = "50";
+31,32c31,32
+<     my $minsim4i     = "85";
+<     my $minsim4c     = "0";
+---
+>     my $minsim4i     = "90";
+>     my $minsim4c     = "45";
