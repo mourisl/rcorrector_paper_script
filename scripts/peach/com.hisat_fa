@@ -1,0 +1,2 @@
+#!/bin/sh
+hisat -p 8 -X 600 -k 10 -f -x ~/data/hisat_indices/Prunus_persica_v1.0_scaffolds_hisat -1 $1 -2 $2

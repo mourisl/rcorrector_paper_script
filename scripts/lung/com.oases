@@ -1,0 +1,10 @@
+#!/bin/sh
+
+#exit
+
+export OMP_THREAD_LIMIT=16
+export OMP_NUM_THREADS=10
+
+velveth oases_${3} $3 -fmtAuto -separate -shortPaired $1 $2
+velvetg oases_${3} -read_trkg yes
+oases oases_${3}

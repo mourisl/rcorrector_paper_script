@@ -1,0 +1,53 @@
+#!/bin/sh
+#BASEDIR=/scratch0/igm2/florea/A8/rddChecker/Simulation/Tophat/Exact/
+#BOWTIEIDX=/scratch0/igm2/florea/A6/ShortReads/HumMus/bowtie_indexes/
+#BWT2IDX=/data1/igm3/genomes/human_hg19/hg19
+BWT2IDX=/home/lsong/data/peach/Prunus_persica_v1.0_scaffolds
+#RSBED=/scratch0/igm2/florea/A6/ShortReads/HumMus/knownGene.hg19.junctions.nodup.bed
+
+head -2000000 $1 > 2M_1_reads
+head -2000000 $2 > 2M_2_reads
+for i in 1 2
+do
+mkdir -p ./2M_$i
+time tophat2 \
+     -o ./2M_$i \
+     --splice-mismatches=1 --max-multihits=10 \
+     -a 6 -F 0.05 -p 8\
+     $BWT2IDX \
+     ./2M_"$i"_reads >& ./run.log
+done
+
+#exit 
+
+samtools view ./2M_1/accepted_hits.bam > 2M_1.sam
+samtools view ./2M_2/accepted_hits.bam > 2M_2.sam 
+
+perl ~/data/mate_dist.pl 2M_1.sam 2M_2.sam > tmp.out
+cut -f7 -d" " tmp.out | sort -n > tmp2.out
+lineCnt=`wc -l tmp2.out | cut -f1 -d" "`
+lineNo=$((lineCnt * 90 / 100)) ;
+k=`sed -n "${lineNo}{p;q;}" tmp2.out`
+
+favg=`perl ~/data/mate_avg.pl $k < tmp2.out | cut -f9 -d' '`
+fstdev=`perl ~/data/mate_stdev.pl $k < tmp2.out | cut -f9 -d' '`
+
+avg=$(printf "%.0f" $favg)
+stdev=$(printf "%.0f" $fstdev)
+
+#
+echo "Done preprocessing..."
+#
+#exit;
+
+##CHANGE MEAN INNER DISTANCE BELOW AND RERUN
+time tophat2 \
+     --splice-mismatches=1 --max-multihits=10 \
+     -a 6 -F 0.05 -p 8\
+     -r $avg --mate-std-dev $stdev \
+     $BWT2IDX \
+     $1 \
+     $2 \
+     >& ./run.log
+
+echo "Done..." 

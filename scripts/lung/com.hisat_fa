@@ -1,0 +1,2 @@
+#!/bin/sh
+~/Softwares/hisat/hisat -f -p 8 -X 600 -k 10 -x ~/data/hisat_indices/hg19 -1 $1 -2 $2

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+REF=/home/lsong/data/hg19.fa
+
+PATH=/home/florea/bin1/ESTmapper/ESTmapper/:$PATH
+PATH=/home/florea/bin1/ESTmapper/:$PATH
+#PATH=/home/lsong/kmer/trunk/Linux-amd64/:$PATH
+# afterwards, change -minlen 50 back to -minlen 100 in ESTmapper-1.pl
+rm -r ESTmapper_trinity_dir
+time perl /home/florea/bin1/ESTmapper/ESTmapper/ESTmapper-1.pl \
+     -mapmrna \
+     ./ESTmapper_trinity_dir \
+     $1 \
+     $REF \
+     -species none \
+     -localsearches 8 \
+     -searchthreads 8 \
+     -localpolishes 8 \
+     >&  ESTmapper_trinity.log 
