@@ -16,6 +16,9 @@ To evaluate the accuracy on the simulated data set, you need to compile the code
 ### Tophat2, Bowtie2, Oases, SPAdes
 For those programs, you can execute the script run_"program_name".sh .
 
+### Perfect alignment and false positive 
+The code to obtain the perfect alignments and compute the false positive rate are contained in "scripts/${data_set}/evaluate_tophat2_FP.sh"
+
 ### Memory usage
 We use the program "memusage" to evaluate the memory usage of programs. It is downloaded from [musket repository](https://sourceforge.net/projects/musket/files/utils/) and should be compiled by "g++ -o memusage memusage.c" before using.
 
